@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>A/B Test Significance - is the difference real? (offline)</title>
+    <meta
+      name="description"
+      content="Check whether an A/B test result is statistically significant, plan how many visitors you need, and export a one-page summary. Runs in your browser; nothing is uploaded."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <header class="site">
+        <div>
+          <h1>A/B Test Significance</h1>
+          <p>Is the difference real, or just chance? And how many visitors do you need?</p>
+        </div>
+        <span class="badge">Works offline - nothing leaves this device</span>
+      </header>
+
+      <section class="card" aria-labelledby="h-a">
+        <h2 id="h-a">1. Check a result</h2>
+        <label for="name">Test name</label>
+        <input type="text" id="name" maxlength="120" />
+        <div class="grid">
+          <div><label for="a-v">Version A: visitors</label><input type="number" id="a-v" min="1" step="1" /></div>
+          <div><label for="a-c">Version A: conversions</label><input type="number" id="a-c" min="0" step="1" /></div>
+          <div><label for="b-v">Version B: visitors</label><input type="number" id="b-v" min="1" step="1" /></div>
+          <div><label for="b-c">Version B: conversions</label><input type="number" id="b-c" min="0" step="1" /></div>
+          <div>
+            <label for="conf">Confidence</label>
+            <select id="conf">
+              <option value="0.8">80%</option>
+              <option value="0.9">90%</option>
+              <option value="0.95" selected>95%</option>
+              <option value="0.99">99%</option>
+            </select>
+          </div>
+        </div>
+        <label for="notes">Notes for the summary (optional)</label>
+        <textarea id="notes" rows="2" maxlength="500"></textarea>
+        <div class="row"><button id="demo" type="button">Load sample test</button></div>
+        <p class="status" id="problem" role="status"></p>
+        <div class="stats" id="stats"></div>
+        <p id="verdict"><strong></strong></p>
+        <ul class="tips" id="warn"></ul>
+        <pre class="report" id="report"></pre>
+        <div class="row">
+          <button class="primary" id="copy" type="button">Copy result</button>
+          <button id="pdf" type="button">Download PDF summary</button>
+          <button id="save" type="button">Save (.json)</button>
+          <label class="file">Open saved test<input type="file" id="open-file" accept=".json,application/json" /></label>
+        </div>
+        <p class="status" id="out-status" role="status"></p>
+      </section>
+
+      <section class="card" aria-labelledby="h-p">
+        <h2 id="h-p">2. Plan the next test</h2>
+        <div class="grid">
+          <div>
+            <label for="p-base">Current conversion rate (%)</label
+            ><input type="number" id="p-base" min="0.01" max="99" step="any" value="5" />
+          </div>
+          <div>
+            <label for="p-mde">Smallest improvement worth detecting</label
+            ><input type="number" id="p-mde" min="0.01" step="any" value="20" />
+          </div>
+          <div>
+            <label for="p-kind">That improvement is</label>
+            <select id="p-kind">
+              <option value="rel">relative (% of current rate)</option>
+              <option value="abs">percentage points</option>
+            </select>
+          </div>
+          <div>
+            <label for="p-conf">Confidence</label>
+            <select id="p-conf">
+              <option value="0.9">90%</option>
+              <option value="0.95" selected>95%</option>
+              <option value="0.99">99%</option>
+            </select>
+          </div>
+          <div>
+            <label for="p-power">Power</label>
+            <select id="p-power">
+              <option value="0.7">70%</option>
+              <option value="0.8" selected>80%</option>
+              <option value="0.9">90%</option>
+            </select>
+          </div>
+          <div>
+            <label for="p-daily">Visitors per day to the whole test (optional)</label><input type="number" id="p-daily" min="1" step="1" />
+          </div>
+        </div>
+        <p class="status" id="p-problem" role="status"></p>
+        <div class="stats" id="p-stats"></div>
+        <p class="hint">
+          Power is the chance of spotting a real improvement of that size. Decide the sample size first and read the result once it is
+          reached.
+        </p>
+      </section>
+
+      <footer class="site"><a href="../../index.html">All tools</a> - MIT licensed - <a href="vendor/README.md">pdf-lib</a></footer>
+    </main>
+    <script src="vendor/pdf-lib.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

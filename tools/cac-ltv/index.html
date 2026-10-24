@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>CAC &amp; LTV Calculator - what does a customer cost and earn? (offline)</title>
+    <meta
+      name="description"
+      content="Work out customer acquisition cost, lifetime value, LTV to CAC ratio and payback in rupees, with a what-if grid. Runs in your browser; nothing is uploaded."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <header class="site">
+        <div>
+          <h1>CAC &amp; LTV Calculator</h1>
+          <p>What does a customer cost to win, what do they bring in, and how long until you are even?</p>
+        </div>
+        <span class="badge">Works offline - nothing leaves this device</span>
+      </header>
+
+      <section class="card" aria-labelledby="h-a">
+        <h2 id="h-a">1. What you spent and won</h2>
+        <div class="grid">
+          <div><label for="ad">Ad spend (Rs.)</label><input type="number" id="ad" min="0" step="any" /></div>
+          <div>
+            <label for="other">Other marketing cost (Rs.): team, tools, agencies</label
+            ><input type="number" id="other" min="0" step="any" />
+          </div>
+          <div><label for="new">New customers in the same period</label><input type="number" id="new" min="1" step="1" /></div>
+          <div><label for="paid">Of those, from paid channels (optional)</label><input type="number" id="paid" min="1" step="1" /></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="h-b">
+        <h2 id="h-b">2. What a customer is worth</h2>
+        <div class="grid">
+          <div>
+            <label for="model">Business type</label>
+            <select id="model">
+              <option value="subscription">Subscription (pays every month)</option>
+              <option value="repeat">Repeat purchases (shop, e-commerce)</option>
+            </select>
+          </div>
+          <div><label for="margin">Gross margin (%)</label><input type="number" id="margin" min="1" max="100" step="any" /></div>
+        </div>
+        <div class="grid" id="g-sub">
+          <div><label for="arpa">Revenue per customer per month (Rs.)</label><input type="number" id="arpa" min="0" step="any" /></div>
+          <div><label for="churn">Monthly churn (%)</label><input type="number" id="churn" min="0.01" max="99" step="any" /></div>
+        </div>
+        <div class="grid" id="g-rep" hidden>
+          <div><label for="aov">Average order value (Rs.)</label><input type="number" id="aov" min="0" step="any" /></div>
+          <div><label for="orders">Orders per customer per year</label><input type="number" id="orders" min="0" step="any" /></div>
+          <div><label for="years">Customer lifespan (years)</label><input type="number" id="years" min="0" step="any" /></div>
+        </div>
+        <div class="row"><button id="demo" type="button">Load sample numbers</button></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-c">
+        <h2 id="h-c">3. Result</h2>
+        <p class="status" id="problem" role="status"></p>
+        <div class="stats" id="stats"></div>
+        <p><strong id="verdict"></strong></p>
+        <ul class="tips" id="warn"></ul>
+        <h3>What if costs or retention change?</h3>
+        <div class="table-wrap"><table id="t-grid"></table></div>
+        <p class="hint">
+          Each cell is the LTV to CAC ratio. Rows change retention (churn or lifespan), columns change what a customer costs to win. Green
+          is 3x or better.
+        </p>
+        <div class="row">
+          <button class="primary" id="copy" type="button">Copy result</button>
+          <button id="csv" type="button">Download CSV</button>
+          <button id="save" type="button">Save (.json)</button>
+          <label class="file">Open saved calculation<input type="file" id="open-file" accept=".json,application/json" /></label>
+        </div>
+        <p class="status" id="out-status" role="status"></p>
+      </section>
+
+      <footer class="site"><a href="../../index.html">All tools</a> - MIT licensed</footer>
+    </main>
+    <script src="js/common.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

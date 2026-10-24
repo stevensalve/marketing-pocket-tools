@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Social Post Planner - plan posts with caption counters (offline)</title>
+    <meta
+      name="description"
+      content="Plan social posts by channel and date with live character and hashtag counters, a month view and calendar reminders. Runs in your browser; nothing is uploaded."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <header class="site">
+        <div>
+          <h1>Social Post Planner</h1>
+          <p>Plan what goes out, where and when, and never discover a caption is too long at the last minute.</p>
+        </div>
+        <span class="badge">Works offline - nothing leaves this device</span>
+      </header>
+
+      <section class="card" aria-labelledby="h-sum">
+        <h2 id="h-sum">Where things stand</h2>
+        <div class="stats" id="stats"></div>
+        <p id="gaps"></p>
+      </section>
+
+      <section class="card noprint" aria-labelledby="h-new">
+        <h2 id="h-new">Add a post</h2>
+        <div class="grid">
+          <div>
+            <label for="n-channel">Channel</label
+            ><select id="n-channel"></select>
+          </div>
+          <div><label for="n-date">Date</label><input type="date" id="n-date" /></div>
+          <div><label for="n-time">Time (optional)</label><input type="time" id="n-time" /></div>
+          <div>
+            <label for="n-status">Status</label
+            ><select id="n-status"></select>
+          </div>
+          <div><label for="n-owner">Owner</label><input type="text" id="n-owner" maxlength="40" /></div>
+          <div><label for="n-link">Link or asset (optional)</label><input type="text" id="n-link" maxlength="300" /></div>
+        </div>
+        <label for="n-caption">Caption or idea</label>
+        <textarea id="n-caption" rows="4"></textarea>
+        <p class="hint"><span class="counter" id="counter"></span></p>
+        <ul class="tips" id="n-warn"></ul>
+        <div class="row">
+          <button class="primary" id="add" type="button">Add post</button><button id="demo" type="button">Load sample plan</button>
+        </div>
+        <p class="status" id="status" role="status"></p>
+      </section>
+
+      <section class="card" aria-labelledby="h-cal">
+        <h2 id="h-cal">Month view</h2>
+        <div class="grid noprint">
+          <div><label for="today">Today</label><input type="date" id="today" /></div>
+          <div><label for="month">Month</label><input type="month" id="month" /></div>
+        </div>
+        <div class="table-wrap"><table class="month" id="t-month"></table></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-list">
+        <h2 id="h-list">All posts</h2>
+        <div class="grid noprint">
+          <div>
+            <label for="f-channel">Channel</label
+            ><select id="f-channel"></select>
+          </div>
+          <div>
+            <label for="f-status">Status</label
+            ><select id="f-status"></select>
+          </div>
+          <div><label for="f-text">Search</label><input type="search" id="f-text" /></div>
+          <div>
+            <label class="inline"><input type="checkbox" id="f-over" /> Overdue only</label>
+          </div>
+        </div>
+        <div class="table-wrap"><table id="t-list"></table></div>
+        <p class="hint" id="empty" hidden>No posts match.</p>
+        <div class="row noprint">
+          <button id="ics" type="button">Calendar reminders (.ics)</button>
+          <button id="csv" type="button">Download CSV</button>
+          <button id="print" type="button">Print</button>
+          <button id="save" type="button">Save (.json)</button>
+          <label class="file">Open saved plan<input type="file" id="open-file" accept=".json,application/json" /></label>
+        </div>
+        <p class="hint noprint">
+          Limits are common published figures; platforms change them, so check before you post. Nothing is stored in the browser: save the
+          plan to a file and open it next time.
+        </p>
+        <p class="status" id="out-status" role="status"></p>
+      </section>
+
+      <footer class="site"><a href="../../index.html">All tools</a> - MIT licensed</footer>
+    </main>
+    <script src="js/common.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

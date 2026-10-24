@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>ROAS &amp; Campaign ROI Calculator - are your ads paying back? (offline)</title>
+    <meta
+      name="description"
+      content="Work out ROAS, ROI, CPA, CPC and CPM for each campaign in rupees and see which ones beat break-even. Runs in your browser; nothing is uploaded."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <header class="site">
+        <div>
+          <h1>ROAS &amp; Campaign ROI Calculator</h1>
+          <p>Are your ads paying back after the product cost? See it campaign by campaign.</p>
+        </div>
+        <span class="badge">Works offline - nothing leaves this device</span>
+      </header>
+
+      <section class="card" aria-labelledby="h-in">
+        <h2 id="h-in">1. Your campaigns</h2>
+        <label for="rows"
+          >One campaign per line: name | spend | impressions | clicks | conversions | revenue (leave a figure empty if you do not have it;
+          amounts in rupees)</label
+        >
+        <textarea id="rows" rows="7"></textarea>
+        <ul id="errors"></ul>
+        <div class="grid">
+          <div><label for="margin">Gross margin (%) - optional</label><input type="number" id="margin" min="1" max="100" step="any" /></div>
+        </div>
+        <p class="hint">
+          Gross margin is what is left of each rupee of sales after the cost of the goods. With it the tool shows break-even ROAS (100
+          divided by margin) and profit after ad spend.
+        </p>
+        <div class="row"><button id="demo" type="button">Load sample campaigns</button><button id="clear" type="button">Clear</button></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-out">
+        <h2 id="h-out">2. Results</h2>
+        <div class="stats" id="stats"></div>
+        <p id="summary"></p>
+        <div class="table-wrap"><table id="t-out"></table></div>
+        <div class="row">
+          <button class="primary" id="copy" type="button">Copy summary</button>
+          <button id="csv" type="button">Download CSV</button>
+          <button id="print" type="button">Print</button>
+          <button id="save" type="button">Save (.json)</button>
+          <label class="file">Open saved campaigns<input type="file" id="open-file" accept=".json,application/json" /></label>
+        </div>
+        <p class="status" id="out-status" role="status"></p>
+      </section>
+
+      <section class="card" aria-labelledby="h-be">
+        <h2 id="h-be">Most you can pay per sale</h2>
+        <div class="grid">
+          <div><label for="b-aov">Average order value (Rs.)</label><input type="number" id="b-aov" min="1" step="any" value="1500" /></div>
+          <div>
+            <label for="b-margin">Gross margin (%)</label><input type="number" id="b-margin" min="1" max="100" step="any" value="40" />
+          </div>
+        </div>
+        <p id="b-out"></p>
+      </section>
+
+      <footer class="site"><a href="../../index.html">All tools</a> - MIT licensed</footer>
+    </main>
+    <script src="js/common.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

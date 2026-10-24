@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Budget Pacing Tracker - are you spending on plan? (offline)</title>
+    <meta
+      name="description"
+      content="Compare spend to date with a straight-line plan for each marketing channel, see projected totals and the daily spend that fits. Runs in your browser; nothing is uploaded."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <header class="site">
+        <div>
+          <h1>Budget Pacing Tracker</h1>
+          <p>Spending too fast, too slow, or just right? See it before the month ends.</p>
+        </div>
+        <span class="badge">Works offline - nothing leaves this device</span>
+      </header>
+
+      <section class="card" aria-labelledby="h-in">
+        <h2 id="h-in">1. The plan</h2>
+        <div class="grid">
+          <div><label for="start">Plan starts</label><input type="date" id="start" /></div>
+          <div><label for="end">Plan ends</label><input type="date" id="end" /></div>
+          <div><label for="today">Today</label><input type="date" id="today" /></div>
+        </div>
+        <label for="rows"
+          >One channel per line: channel | budget | spent so far (including today) | start (optional) | end (optional). Amounts in
+          rupees.</label
+        >
+        <textarea id="rows" rows="6"></textarea>
+        <ul id="errors"></ul>
+        <p class="hint">Start and end default to the plan dates; set them to track a channel that runs for a shorter flight.</p>
+        <div class="row"><button id="demo" type="button">Load sample plan</button><button id="clear" type="button">Clear</button></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-out">
+        <h2 id="h-out">2. How you are pacing</h2>
+        <div class="stats" id="stats"></div>
+        <p id="projection"></p>
+        <ul class="tips" id="flags"></ul>
+        <div class="table-wrap"><table id="t-out"></table></div>
+        <p class="hint">
+          The bar shows spend so far; the dark line marks where a straight-line plan would be today. Between 90% and 110% of plan counts as
+          on pace.
+        </p>
+        <div class="row">
+          <button class="primary" id="copy" type="button">Copy summary</button>
+          <button id="csv" type="button">Download CSV</button>
+          <button id="print" type="button">Print</button>
+          <button id="save" type="button">Save (.json)</button>
+          <label class="file">Open saved plan<input type="file" id="open-file" accept=".json,application/json" /></label>
+        </div>
+        <p class="status" id="out-status" role="status"></p>
+      </section>
+
+      <footer class="site"><a href="../../index.html">All tools</a> - MIT licensed</footer>
+    </main>
+    <script src="js/common.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
